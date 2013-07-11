@@ -13,13 +13,12 @@ require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "vertebrae"
-  gem.homepage = "http://github.com/woodhull/vertebrae"
+  gem.homepage = "http://github.com/controlshift/vertebrae"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
-  gem.email = "woodhull@gmail.com"
+  gem.summary = %Q{API Client Infrastructure}
+  gem.description = %Q{A set of low level infrastructure and reusable code for building API clients}
+  gem.email = "nathan@controlshiftlabs.com"
   gem.authors = ["Nathan Woodhull"]
   # dependencies defined in Gemfile
 end
