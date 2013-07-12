@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "vertebrae"
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Woodhull"]
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
     "lib/constants.rb",
     "lib/core_ext/array.rb",
     "lib/railties.rb",
+    "lib/request.rb",
     "lib/request/basic_auth.rb",
     "lib/response/raise_error.rb",
     "lib/vertebrae.rb",
@@ -43,6 +44,7 @@ Gem::Specification.new do |s|
     "spec/dummy/client.rb",
     "spec/dummy/dummy.rb",
     "spec/logger_spec.rb",
+    "spec/request_spec.rb",
     "spec/spec_helper.rb",
     "vertebrae.gemspec"
   ]
