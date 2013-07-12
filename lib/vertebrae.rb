@@ -2,6 +2,7 @@ require 'constants'
 require 'configuration'
 require 'connection'
 require 'authorization'
+require 'request'
 require 'api'
 
 
