@@ -10,3 +10,11 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each {|f| require f}
 RSpec.configure do |config|
   
 end
+
+
+def reset_authentication_for(object)
+  [ 'username', 'password' ].each do |item|
+    Vertebrae.send("#{item}=", nil)
+    object.send("#{item}=", nil)
+  end
+end
