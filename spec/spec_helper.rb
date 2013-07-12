@@ -2,6 +2,9 @@ $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
 require 'vertebrae'
+require 'dummy/dummy'
+require 'dummy/client'
+
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
@@ -13,7 +16,7 @@ end
 
 
 def reset_authentication_for(object)
-  [ 'username', 'password' ].each do |item|
+  ['username', 'password'].each do |item|
     Vertebrae.send("#{item}=", nil)
     object.send("#{item}=", nil)
   end

@@ -1,8 +1,5 @@
 require 'spec_helper'
 
-require 'dummy/dummy'
-require 'dummy/client'
-
 describe Vertebrae::Authorization do
   let(:options) { {} }
 

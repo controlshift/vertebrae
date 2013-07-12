@@ -27,5 +27,10 @@ describe Vertebrae::API do
     its(:basic_auth) { should eq 'login:password' }
   end
 
-
+  describe 'dummy' do
+    describe 'should delegate to the client class' do
+      specify{ Dummy.new.should respond_to(:api)  }
+      specify{ Dummy.should respond_to(:api) }
+    end
+  end
 end
