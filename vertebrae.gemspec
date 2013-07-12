@@ -43,7 +43,8 @@ Gem::Specification.new do |s|
     "spec/dummy/client.rb",
     "spec/dummy/dummy.rb",
     "spec/logger_spec.rb",
-    "spec/spec_helper.rb"
+    "spec/spec_helper.rb",
+    "vertebrae.gemspec"
   ]
   s.homepage = "http://github.com/controlshift/vertebrae"
   s.licenses = ["MIT"]
