@@ -11,6 +11,16 @@ module Vertebrae
       @@logger = logger
     end
 
+    class << self
+      def logger
+        @@logger ||= Logger.new(STDOUT)
+      end
+
+      def logger=(logger)
+        @@logger = logger
+      end
+    end
+
     # implement this in your api
     #
     def new(options = {}, &block)
