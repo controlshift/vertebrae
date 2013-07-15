@@ -18,7 +18,7 @@ module Vertebrae
     ].freeze
 
     def default_options(options={})
-      Vertebrae.faraday_options(options)
+      Vertebrae::Base.faraday_options(options)
     end
 
     # Default middleware stack that uses default adapter as specified at
@@ -70,7 +70,7 @@ module Vertebrae
     def connection(options={})
       conn_options = default_options(options)
       clear_cache unless options.empty?
-      Vertebrae.logger.debug "OPTIONS:#{conn_options.inspect}"
+      Vertebrae::Base.logger.debug "OPTIONS:#{conn_options.inspect}"
 
       @connection ||= Faraday.new(conn_options.merge(:builder => stack(options)))
     end

@@ -17,7 +17,7 @@ end
 
 def reset_authentication_for(object)
   ['username', 'password'].each do |item|
-    Vertebrae.send("#{item}=", nil)
+    Vertebrae::Base.send("#{item}=", nil)
     object.send("#{item}=", nil)
   end
 end

@@ -35,7 +35,7 @@ module Vertebrae
     # Configure options and process basic authorization
     #
     def setup(options={})
-      options = Vertebrae.options.merge(options)
+      options = Vertebrae::Base.options.merge(options)
       self.current_options = options
       Configuration.keys.each do |key|
         send("#{key}=", options[key])
