@@ -4,7 +4,7 @@ module Vertebrae
 
       def on_complete(response)
         status_code = response[:status].to_i
-        if (500...600).include? status_code
+        if (400...600).include? status_code
           raise Exception.new(error_message(response))
         end
       end
