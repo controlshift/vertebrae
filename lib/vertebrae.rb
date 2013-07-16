@@ -8,7 +8,7 @@ require 'base'
 
 
 require 'active_support/all'
-require 'vertebrae/railties' if defined? Rails
+require 'railties' if defined? Rails
 
 
 module Vertebrae
