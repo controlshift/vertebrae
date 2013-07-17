@@ -2,7 +2,6 @@ module Vertebrae
   module Configuration
     include Vertebrae::Constants
 
-
     VALID_OPTIONS_KEYS = [
         :adapter,
         :prefix,
@@ -13,6 +12,7 @@ module Vertebrae
         :username,
         :password,
         :connection_options,
+        :content_type,
     ].freeze
 
     # Other adapters are :typhoeus, :patron, :em_synchrony, :excon, :test
@@ -42,6 +42,8 @@ module Vertebrae
     # By default uses the Faraday connection options if none is set
     DEFAULT_CONNECTION_OPTIONS = {}
 
+    DEFAULT_CONTENT_TYPE = 'application/json'.freeze
+
 
     attr_accessor *VALID_OPTIONS_KEYS
 
@@ -67,7 +69,7 @@ module Vertebrae
               ACCEPT           => "application/json;q=0.1",
               ACCEPT_CHARSET   => "utf-8",
               USER_AGENT       => user_agent,
-              CONTENT_TYPE     => 'application/json'
+              CONTENT_TYPE     => content_type
           },
           :ssl => ops.fetch(:ssl) { ssl },
           :url => ops.fetch(:endpoint) { self.endpoint(ops) }
@@ -99,6 +101,7 @@ module Vertebrae
       self.username           = DEFAULT_USERNAME
       self.password           = DEFAULT_PASSWORD
       self.connection_options = DEFAULT_CONNECTION_OPTIONS
+      self.content_type       = DEFAULT_CONTENT_TYPE
       self
     end
   end # Configuration
