@@ -1,6 +1,8 @@
 module Vertebrae
-  module Configuration
+  class Configuration
     include Vertebrae::Constants
+    include ActiveSupport::Inflector
+    include Authorization
 
     VALID_OPTIONS_KEYS = [
         :adapter,
@@ -45,64 +47,64 @@ module Vertebrae
     DEFAULT_CONTENT_TYPE = 'application/json'.freeze
 
 
-    attr_accessor *VALID_OPTIONS_KEYS
-
-    # Convenience method to allow for global setting of configuration options
-    def configure
-      yield self
+    VALID_OPTIONS_KEYS.each do | key |
+      define_method("default_#{key}".intern) { default_options[key] }
     end
 
-    def self.extended(base)
-      base.reset!
+    VALID_OPTIONS_KEYS.each do | key |
+      define_method(key) do
+        options[key] || self.send("default_#{key}")
+      end
     end
 
-    class << self
-      def keys
-        VALID_OPTIONS_KEYS
+    VALID_OPTIONS_KEYS.each do | key |
+      define_method("#{key}=".intern) do |value|
+        options[key] = value
+      end
+    end
+
+    attr_accessor :options
+    attr_accessor :default_options
+
+    def initialize(options)
+      self.options = options
+      self.default_options = {}
+
+      VALID_OPTIONS_KEYS.each do |key|
+        default_options[key] = "Vertebrae::Configuration::DEFAULT_#{key.to_s.upcase}".constantize
       end
     end
 
 
-    def faraday_options(ops)
+    def faraday_options
       {
-          :headers => {
-              ACCEPT           => "application/json;q=0.1",
-              ACCEPT_CHARSET   => "utf-8",
-              USER_AGENT       => user_agent,
-              CONTENT_TYPE     => content_type
-          },
-          :ssl => ops.fetch(:ssl) { ssl },
-          :url => ops.fetch(:endpoint) { self.endpoint(ops) }
-      }.merge(options)
+        :headers => {
+          ACCEPT           => "application/json;q=0.1",
+          ACCEPT_CHARSET   => "utf-8",
+          USER_AGENT       => user_agent,
+          CONTENT_TYPE     => content_type
+        },
+        :ssl =>  ssl,
+        :url => endpoint
+      }
     end
 
-    def endpoint(ops)
-      h = ops[:host]   ? ops[:host]   : self.host
-      p = ops[:prefix] ? ops[:prefix] : self.prefix
 
-      "https://#{h}#{p}"
-    end
-
-    def options
-      options = {}
-      VALID_OPTIONS_KEYS.each { |k| options[k] = send(k) }
-      options
-    end
-
-    # Reset configuration options to their defaults
+    # Extract login and password from basic_auth parameter
     #
-    def reset!
-      self.adapter            = DEFAULT_ADAPTER
-      self.prefix             = DEFAULT_PREFIX
-      self.ssl                = DEFAULT_SSL
-      self.mime_type          = DEFAULT_MIME_TYPE
-      self.user_agent         = DEFAULT_USER_AGENT
-      self.host               = DEFAULT_HOST
-      self.username           = DEFAULT_USERNAME
-      self.password           = DEFAULT_PASSWORD
-      self.connection_options = DEFAULT_CONNECTION_OPTIONS
-      self.content_type       = DEFAULT_CONTENT_TYPE
-      self
+    def process_basic_auth(auth)
+      case auth
+        when String
+          self.username, self.password = auth.split(':', 2)
+        when Hash
+          self.username = auth[:username]
+          self.password = auth[:password]
+      end
     end
-  end # Configuration
+
+
+    def endpoint
+      "https://#{self.host}#{self.prefix}"
+    end
+  end
 end

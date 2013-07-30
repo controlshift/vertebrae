@@ -1,8 +1,5 @@
 module Vertebrae
   module Base
-    extend Configuration
-
-
     def logger
       @@logger ||= Logger.new(STDOUT)
     end

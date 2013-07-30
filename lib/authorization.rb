@@ -1,5 +1,12 @@
 module Vertebrae
   module Authorization
+    def username?
+      username.present?
+    end
+
+    def password?
+      password.present?
+    end
 
     # Check whether authentication credentials are present
     def authenticated?

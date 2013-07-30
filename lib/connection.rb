@@ -2,12 +2,15 @@ require 'faraday'
 require 'faraday_middleware'
 require 'request/basic_auth'
 require 'response/raise_error'
+require 'authorization'
 
 module Vertebrae
-  module Connection
-
-    extend self
+  class Connection
     include Vertebrae::Constants
+    include Vertebrae::Authorization
+
+    attr_accessor :options
+    attr_accessor :configuration
 
     ALLOWED_OPTIONS = [
         :headers,
@@ -17,18 +20,21 @@ module Vertebrae
         :ssl
     ].freeze
 
-    def default_options(options={})
-      Vertebrae::Base.faraday_options(options)
+    def initialize(options)
+      @options = options
+      @configuration = Vertebrae::Configuration.new(options)
+      @connection = nil
+      @stack = nil
     end
 
     # Default middleware stack that uses default adapter as specified at
     # configuration stage.
     #
-    def default_middleware(options={})
+    def default_middleware
       Proc.new do |builder|
         builder.use Faraday::Request::Multipart
         builder.use Faraday::Request::UrlEncoded
-        builder.use Vertebrae::Request::BasicAuth, authentication if authenticated?
+        builder.use Vertebrae::Request::BasicAuth, configuration.authentication if configuration.authenticated?
 
         builder.use Faraday::Response::Logger if ENV['DEBUG']
         unless options[:raw]
@@ -36,45 +42,31 @@ module Vertebrae
           builder.use FaradayMiddleware::ParseJson
         end
         builder.use Vertebrae::Response::RaiseError
-        builder.adapter adapter
+        builder.adapter configuration.adapter
       end
-    end
-
-    @connection = nil
-
-    @stack = nil
-
-    def clear_cache
-      @connection = nil
-    end
-
-    def caching?
-      !@connection.nil?
     end
 
     # Exposes middleware builder to facilitate custom stacks and easy
     # addition of new extensions such as cache adapter.
     #
-    def stack(options={}, &block)
+    def stack(&block)
       @stack ||= begin
         if block_given?
           Faraday::Builder.new(&block)
         else
-          Faraday::Builder.new(&default_middleware(options))
+          Faraday::Builder.new(&default_middleware)
         end
       end
     end
 
     # Returns a Fraday::Connection object
     #
-    def connection(options={})
-      conn_options = default_options(options)
-      clear_cache unless options.empty?
-      Vertebrae::Base.logger.debug "OPTIONS:#{conn_options.inspect}"
-
-      @connection ||= Faraday.new(conn_options.merge(:builder => stack(options)))
+    def connection
+      if @connection
+        @connection
+      else
+        @connection ||= Faraday.new(configuration.faraday_options.merge(:builder => stack))
+      end
     end
-
-
   end
 end
