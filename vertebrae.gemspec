@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "vertebrae"
-  s.version = "0.1.6"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Woodhull"]
-  s.date = "2013-07-17"
+  s.date = "2013-07-30"
   s.description = "A set of low level infrastructure and reusable code for building API clients"
   s.email = "nathan@controlshiftlabs.com"
   s.extra_rdoc_files = [
@@ -34,13 +34,13 @@ Gem::Specification.new do |s|
     "lib/connection.rb",
     "lib/constants.rb",
     "lib/core_ext/array.rb",
+    "lib/model.rb",
     "lib/railties.rb",
     "lib/request.rb",
     "lib/request/basic_auth.rb",
     "lib/response/raise_error.rb",
     "lib/vertebrae.rb",
     "spec/api_spec.rb",
-    "spec/authorization_spec.rb",
     "spec/configuration_spec.rb",
     "spec/dummy/client.rb",
     "spec/dummy/dummy.rb",
