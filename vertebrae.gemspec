@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/controlshift/vertebrae"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.7"
+  s.rubygems_version = "2.0.6"
   s.summary = "API Client Infrastructure"
 
   if s.respond_to? :specification_version then
