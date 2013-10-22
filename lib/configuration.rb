@@ -15,14 +15,14 @@ module Vertebrae
         :password,
         :connection_options,
         :content_type,
-        :schema,
+        :scheme,
     ].freeze
 
     # Other adapters are :typhoeus, :patron, :em_synchrony, :excon, :test
     DEFAULT_ADAPTER = :net_http
 
-    # The default HTTP schema configuration
-    DEFAULT_SCHEMA = 'https'
+    # The default HTTP scheme configuration
+    DEFAULT_SCHEME = 'https'
 
     # The default SSL configuration
     DEFAULT_SSL = {}
@@ -108,7 +108,7 @@ module Vertebrae
 
 
     def endpoint
-      "#{self.schema}://#{self.host}#{self.prefix}"
+      "#{self.scheme}://#{self.host}#{self.prefix}"
     end
   end
 end

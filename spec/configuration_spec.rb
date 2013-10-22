@@ -5,7 +5,7 @@ describe Vertebrae::Configuration do
   subject { Vertebrae::Configuration.new({}) }
 
   {:adapter => described_class::DEFAULT_ADAPTER,
-   :schema => described_class::DEFAULT_SCHEMA,
+   :scheme => described_class::DEFAULT_SCHEME,
    :ssl => described_class::DEFAULT_SSL,
    :user_agent => described_class::DEFAULT_USER_AGENT,
    :username => described_class::DEFAULT_USERNAME,
@@ -18,13 +18,13 @@ describe Vertebrae::Configuration do
   its(:connection_options) { should be_empty }
 
   describe "override" do
-    subject{ Vertebrae::Configuration.new({username: 'foo', password: 'bar', schema: 'http'}) }
+    subject{ Vertebrae::Configuration.new({username: 'foo', password: 'bar', scheme: 'http'}) }
 
-    its(:default_schema) { should == described_class::DEFAULT_SCHEMA }
+    its(:default_scheme) { should == described_class::DEFAULT_SCHEME }
     its(:default_username) { should == described_class::DEFAULT_USERNAME }
     its(:default_password) { should == described_class::DEFAULT_PASSWORD }
 
-    its(:schema) { should == 'http'}
+    its(:scheme) { should == 'http'}
     its(:username) { should == 'foo'}
     its(:password) { should == 'bar'}
   end
