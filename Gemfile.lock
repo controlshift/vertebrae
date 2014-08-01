@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vertebrae (0.2.5)
+    vertebrae (0.2.6)
       activesupport
       faraday
       faraday_middleware
