@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
     ".rspec",
     ".ruby-gemset",
     ".ruby-version",
+    ".travis.yml",
     "Gemfile",
     "Gemfile.lock",
     "LICENSE.txt",
