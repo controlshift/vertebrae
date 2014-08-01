@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "vertebrae"
-  s.version = "0.2.4"
+  s.version = "0.2.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nathan Woodhull"]
-  s.date = "2013-10-22"
+  s.date = "2014-08-01"
   s.description = "A set of low level infrastructure and reusable code for building API clients"
   s.email = "nathan@controlshiftlabs.com"
   s.extra_rdoc_files = [
@@ -52,7 +52,7 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/controlshift/vertebrae"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "2.0.6"
+  s.rubygems_version = "2.0.14"
   s.summary = "API Client Infrastructure"
 
   if s.respond_to? :specification_version then
