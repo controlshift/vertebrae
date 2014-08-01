@@ -7,7 +7,7 @@ module Vertebrae
     # Create new API
     #
     def initialize(options={}, &block)
-      options.merge!(default_options)
+      default_options.merge!(options)
 
       yield_or_eval(&block) if block_given?
       self.connection = Connection.new(options)
