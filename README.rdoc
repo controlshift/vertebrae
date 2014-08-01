@@ -1,6 +1,8 @@
 = vertebrae
 
-Description goes here.
+Some basic infrastructure for writing beautiful API clients. See tijuana_client for a small example.
+
+[![Build Status](https://travis-ci.org/controlshift/vertebrae.svg)](https://travis-ci.org/controlshift/vertebrae)
 
 == Contributing to vertebrae
  
