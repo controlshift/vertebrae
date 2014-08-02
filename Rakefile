@@ -20,15 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{A set of low level infrastructure and reusable code for building API clients}
   gem.email = "nathan@controlshiftlabs.com"
   gem.authors = ["Nathan Woodhull"]
-
-  gem.add_dependency 'activesupport'
-  gem.add_dependency 'faraday'
-  gem.add_dependency 'faraday_middleware'
-  gem.add_dependency 'hashie'
-
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'bundler'
-  gem.add_development_dependency 'jeweler'
+  # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
 
