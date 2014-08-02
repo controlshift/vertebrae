@@ -5,7 +5,7 @@ module Vertebrae
       def on_complete(response)
         status_code = response[:status].to_i
         if (400...600).include? status_code
-          raise Exception.new(error_message(response))
+          raise StandardError.new(error_message(response))
         end
       end
 
@@ -14,6 +14,6 @@ module Vertebrae
       end
     end
 
-    class NotFound < Exception ; end
+    class NotFound < StandardError ; end
   end # Response::RaiseError
 end
