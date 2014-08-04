@@ -13,5 +13,7 @@ gem 'hashie'
 group :development do
   gem "rspec"
   gem "bundler"
+  gem "webmock"
+  gem "rspec-its"
   gem "jeweler", "~> 2.0.0"
 end

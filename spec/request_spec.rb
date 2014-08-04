@@ -30,4 +30,30 @@ describe Vertebrae::Request do
     vb.should_receive(:request).with(:delete, path, params, options)
     vb.delete_request path, params, options
   end
+
+  describe 'it should result in an appropriately configured connection object when it comes time to run transactions' do
+    describe 'initialize' do
+      before(:each) do
+        Vertebrae::API.any_instance.stub(:default_options).and_return({host: 'test.com'})
+      end
+
+      context 'with an empty hash' do
+        let(:options) { {} }
+        it 'should make the request to the default host' do
+          skip
+          stub_request(:get, 'https://test.com/path')
+          vb.request(:get, '/path', {}, content_type: 'text/csv')
+        end
+      end
+
+      context 'with a different host' do
+        let(:options) { {host: 'test2.com'} }
+        it 'should make the request to the default host' do
+          skip
+          stub_request(:get, 'https://test2.com/path')
+          vb.request(:get, '/path', {}, content_type: 'text/csv')
+        end
+      end
+    end
+  end
 end
