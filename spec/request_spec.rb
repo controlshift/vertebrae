@@ -54,5 +54,24 @@ describe Vertebrae::Request do
           vb.request(:get, '/path', {}, options)
         end
       end
+
+      context 'with host specified at client initiation time' do
+        let(:options) { {} }
+
+        let(:vb) { Vertebrae::API.new host: 'test3.com' }
+
+        it 'should make the request to the default host' do
+          stub_request(:get, 'https://test3.com/path')
+          vb.request(:get, '/path', {}, options)
+        end
+
+        context 'with a different host' do
+          let(:options) { {host: 'test2.com'} }
+          it 'should make the request to the default host' do
+            stub_request(:get, 'https://test2.com/path')
+            vb.request(:get, '/path', {}, options)
+          end
+        end
+      end
     end
 end

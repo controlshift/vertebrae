@@ -28,7 +28,7 @@ module Vertebrae
       if !::Vertebrae::Request::METHODS.include?(method)
         raise ArgumentError, "unknown http method: #{method}"
       end
-      connection.options = default_options.merge(options)
+      connection.options = default_options.merge(initialisation_options.merge(options))
 
       path =  connection.configuration.prefix + '/' + path
 
