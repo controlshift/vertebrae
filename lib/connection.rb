@@ -23,8 +23,12 @@ module Vertebrae
     def initialize(options)
       @options = options
       @configuration = Vertebrae::Configuration.new(options)
-      @connection = nil
       @stack = nil
+    end
+
+    def options=(options)
+      @options = options
+      @configuration = Vertebrae::Configuration.new(options)
     end
 
     # Default middleware stack that uses default adapter as specified at
@@ -59,14 +63,10 @@ module Vertebrae
       end
     end
 
-    # Returns a Fraday::Connection object
+    # Returns a Faraday::Connection object
     #
     def connection
-      if @connection
-        @connection
-      else
-        @connection ||= Faraday.new(configuration.faraday_options.merge(:builder => stack))
-      end
+      Faraday.new(configuration.faraday_options.merge(:builder => stack))
     end
   end
 end
