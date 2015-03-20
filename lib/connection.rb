@@ -56,9 +56,9 @@ module Vertebrae
     def stack(&block)
       @stack ||= begin
         if block_given?
-          Faraday::Builder.new(&block)
+          Faraday::RackBuilder.new(&block)
         else
-          Faraday::Builder.new(&default_middleware)
+          Faraday::RackBuilder.new(&default_middleware)
         end
       end
     end
