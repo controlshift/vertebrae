@@ -3,11 +3,11 @@ require 'spec_helper'
 describe Vertebrae::API do
   subject { described_class.new(options) }
 
-  it { described_class.included_modules.should include Vertebrae::Request }
+  it { expect(described_class.included_modules).to include Vertebrae::Request }
 
   describe 'initialize' do
     before(:each) do
-      Vertebrae::API.any_instance.stub(:default_options).and_return({content_type: 'foo'})
+      allow_any_instance_of(Vertebrae::API).to receive(:default_options).and_return({content_type: 'foo'})
     end
 
     context 'with an empty hash' do
@@ -23,8 +23,8 @@ describe Vertebrae::API do
 
   describe 'dummy' do
     describe 'should delegate to the client class' do
-      specify{ Dummy.new.should respond_to(:api)  }
-      specify{ Dummy.should respond_to(:api) }
+      specify { expect(Dummy.new).to respond_to(:api)  }
+      specify { expect(Dummy).to respond_to(:api) }
     end
   end
 end

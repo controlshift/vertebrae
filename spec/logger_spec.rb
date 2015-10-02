@@ -2,17 +2,17 @@ require 'spec_helper'
 
 describe 'logging' do
   it "should have a logger" do
-    Dummy.respond_to?(:logger).should be_truthy
+    expect(Dummy).to respond_to(:logger)
   end
 
   it "should be able to log debug methods" do
-    Dummy.logger.respond_to?(:debug).should be_truthy
+    expect(Dummy.logger).to respond_to(:debug)
   end
 
   it "should be settable" do
-    Dummy.respond_to?(:logger=).should be_truthy
-    log = double()
+    expect(Dummy).to respond_to(:logger=)
+    log = double
     Dummy.logger = log
-    Dummy.logger.should == log
+    expect(Dummy.logger).to eq(log)
   end
 end

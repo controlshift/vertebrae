@@ -40,7 +40,7 @@ describe Vertebrae::Configuration do
   describe 'endpoint' do
     subject { Vertebrae::Configuration.new({host: 'test.com', prefix: ''}) }
 
-    specify { subject.host.should == 'test.com' }
-    specify { subject.endpoint.should == 'https://test.com'}
+    specify { expect(subject.host).to eq('test.com') }
+    specify { expect(subject.endpoint).to eq('https://test.com')}
   end
 end
