@@ -16,6 +16,7 @@ module Vertebrae
         :connection_options,
         :content_type,
         :scheme,
+        :port
     ].freeze
 
     # Other adapters are :typhoeus, :patron, :em_synchrony, :excon, :test
@@ -26,6 +27,9 @@ module Vertebrae
 
     # The default SSL configuration
     DEFAULT_SSL = {}
+
+    # by default do not set a port so that it is not specified on endpoint
+    DEFAULT_PORT = nil
 
     # By default the <tt>Accept</tt> header will make a request for <tt>JSON</tt>
     DEFAULT_MIME_TYPE = :json
@@ -108,7 +112,7 @@ module Vertebrae
 
 
     def endpoint
-      "#{self.scheme}://#{self.host}#{self.prefix}"
+      "#{self.scheme}://#{self.host}#{self.port.present? ? ":#{self.port}" : ''}#{self.prefix}"
     end
   end
 end

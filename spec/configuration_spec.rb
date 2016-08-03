@@ -38,9 +38,25 @@ describe Vertebrae::Configuration do
   end
 
   describe 'endpoint' do
-    subject { Vertebrae::Configuration.new({host: 'test.com', prefix: ''}) }
+    context 'with no port specification' do
+      subject { Vertebrae::Configuration.new({host: 'test.com', prefix: ''}) }
 
-    specify { expect(subject.host).to eq('test.com') }
-    specify { expect(subject.endpoint).to eq('https://test.com')}
+      specify { expect(subject.host).to eq('test.com') }
+      specify { expect(subject.endpoint).to eq('https://test.com')}
+    end
+
+    context 'with port specification' do
+      subject { Vertebrae::Configuration.new({host: 'test.com', prefix: '', port: 8080}) }
+
+      specify { expect(subject.port).to eq(8080) }
+      specify { expect(subject.endpoint).to eq('https://test.com:8080')}
+
+      context 'with prefix' do
+        subject { Vertebrae::Configuration.new({host: 'test.com', prefix: '/api/v1', port: 8080}) }
+
+        specify { expect(subject.prefix).to eq('/api/v1') }
+        specify { expect(subject.endpoint).to eq('https://test.com:8080/api/v1')}
+      end
+    end
   end
 end

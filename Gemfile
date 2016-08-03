@@ -15,5 +15,5 @@ group :development do
   gem "bundler"
   gem "webmock"
   gem "rspec-its"
-  gem "jeweler", "~> 2.0.0"
+  gem "juwelier", "~> 2.1.0"
 end
