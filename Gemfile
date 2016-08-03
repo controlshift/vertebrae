@@ -3,7 +3,7 @@ source "http://rubygems.org"
 # Example:
 
 gem 'activesupport'
-gem 'faraday'
+gem 'faraday', '>= 0.9.0'
 gem 'faraday_middleware'
 gem 'hashie'
 
