@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib"]
   s.authors = ["Nathan Woodhull"]
-  s.date = "2016-08-03"
+  s.date = "2016-09-01"
   s.description = "A set of low level infrastructure and reusable code for building API clients"
   s.email = "nathan@controlshiftlabs.com"
   s.extra_rdoc_files = [
@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
     "lib/request.rb",
     "lib/request/basic_auth.rb",
     "lib/response/raise_error.rb",
+    "lib/response_error.rb",
     "lib/vertebrae.rb",
     "spec/api_spec.rb",
     "spec/configuration_spec.rb",
