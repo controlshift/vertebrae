@@ -15,5 +15,5 @@ group :development do
   gem "bundler"
   gem "webmock"
   gem "rspec-its"
-  gem "juwelier", "~> 2.1.0"
+  gem "juwelier", git: 'https://github.com/controlshift/juwelier.git', branch: 'various_improvements'
 end
