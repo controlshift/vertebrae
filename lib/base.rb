@@ -30,6 +30,9 @@ module Vertebrae
     end
 
     def respond_to?(method, include_private = false)
+      # Avoid infinite loop error when attempting to stub the `new` method
+      return true if method.to_s == 'new'
+
       new.respond_to?(method, include_private) || super(method, include_private)
     end
   end
