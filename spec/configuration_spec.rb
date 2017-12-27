@@ -4,8 +4,7 @@ describe Vertebrae::Configuration do
 
   subject { Vertebrae::Configuration.new({}) }
 
-  {:adapter => described_class::DEFAULT_ADAPTER,
-   :scheme => described_class::DEFAULT_SCHEME,
+  {:scheme => described_class::DEFAULT_SCHEME,
    :ssl => described_class::DEFAULT_SSL,
    :user_agent => described_class::DEFAULT_USER_AGENT,
    :username => described_class::DEFAULT_USERNAME,
@@ -57,6 +56,19 @@ describe Vertebrae::Configuration do
         specify { expect(subject.prefix).to eq('/api/v1') }
         specify { expect(subject.endpoint).to eq('https://test.com:8080/api/v1')}
       end
+    end
+  end
+
+  describe 'adapter' do
+    it 'should default to :net_http' do
+      expect(subject.adapter).to eq(:net_http)
+    end
+  end
+
+  describe 'adapter=' do
+    it 'should allow setting and retrieval' do
+      subject.adapter = :foo
+      expect(subject.adapter).to eq(:foo)
     end
   end
 end

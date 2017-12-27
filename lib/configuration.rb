@@ -5,7 +5,6 @@ module Vertebrae
     include Authorization
 
     VALID_OPTIONS_KEYS = [
-        :adapter,
         :prefix,
         :ssl,
         :mime_type,
@@ -18,9 +17,6 @@ module Vertebrae
         :scheme,
         :port
     ].freeze
-
-    # Other adapters are :typhoeus, :patron, :em_synchrony, :excon, :test
-    DEFAULT_ADAPTER = :net_http
 
     # The default HTTP scheme configuration
     DEFAULT_SCHEME = 'https'
@@ -71,6 +67,14 @@ module Vertebrae
       end
     end
 
+    def adapter
+      options[:adapter] || auto_detect_adapter
+    end
+
+    def adapter=(value)
+      options[:adapter] = value
+    end
+
     attr_accessor :options
     attr_accessor :default_options
 
@@ -92,7 +96,7 @@ module Vertebrae
           USER_AGENT       => user_agent,
           CONTENT_TYPE     => content_type
         },
-        :ssl =>  ssl,
+        :ssl => ssl,
         :url => endpoint
       }
     end
@@ -113,6 +117,30 @@ module Vertebrae
 
     def endpoint
       "#{self.scheme}://#{self.host}#{self.port.present? ? ":#{self.port}" : ''}#{self.prefix}"
+    end
+
+    private
+
+    # Auto-detect the best adapter (HTTP "driver") available, based on libraries
+    # loaded by the user, preferring those with persistent connections
+    # ("keep-alive") by default
+    #
+    # @return [Symbol]
+    #
+    #
+    def auto_detect_adapter
+      case
+        when defined?(::Typhoeus)
+          :typhoeus
+        when defined?(::Patron)
+          :patron
+        when defined?(::HTTPClient)
+          :httpclient
+        when defined?(::Net::HTTP::Persistent)
+          :net_http_persistent
+        else
+          ::Faraday.default_adapter
+      end
     end
   end
 end
