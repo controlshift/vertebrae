@@ -1,6 +1,5 @@
 require 'faraday'
 require 'faraday_middleware'
-require 'request/basic_auth'
 require 'response/raise_error'
 require 'authorization'
 
@@ -38,7 +37,9 @@ module Vertebrae
       Proc.new do |builder|
         builder.use Faraday::Request::Multipart
         builder.use Faraday::Request::UrlEncoded
-        builder.use Vertebrae::Request::BasicAuth, configuration.authentication if configuration.authenticated?
+        if configuration.authenticated?
+          builder.use Faraday::Request::BasicAuthentication, configuration.username, configuration.password
+        end
 
         builder.use Faraday::Response::Logger if ENV['DEBUG']
         unless options[:raw]
