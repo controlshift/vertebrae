@@ -73,5 +73,15 @@ describe Vertebrae::Request do
         end
       end
     end
+
+    context 'with basic auth' do
+      let(:options) { {} }
+      let(:vb) { Vertebrae::API.new username: 'user', password: 'pass' }
+
+      it 'should make requests with basic auth' do
+        stub_request(:get, 'https://test3.com/path').with(basic_auth: ['user', 'pass'])
+        vb.request(:get, '/path', {}, {host: 'test3.com'})
+      end
+    end
   end
 end
