@@ -71,4 +71,38 @@ describe Vertebrae::Configuration do
       expect(subject.adapter).to eq(:foo)
     end
   end
+
+  describe '#faraday_options' do
+    subject { Vertebrae::Configuration.new(host: 'example.com') }
+
+    it 'should include headers, ssl, and url settings by default' do
+      opts = subject.faraday_options
+      expect(opts.keys).to contain_exactly(:headers, :ssl, :url)
+      expect(opts[:headers]).to eq({'Accept' => 'application/json;q=0.1',
+                                    'Accept-Charset' => 'utf-8',
+                                    'User-Agent' => 'Vertebrae REST Gem',
+                                    'Content-Type' => 'application/json'})
+      expect(opts[:ssl]).to eq({})
+      expect(opts[:url]).to eq 'https://example.com/'
+    end
+
+    context 'with connection_options' do
+      let(:connection_options) { {ssl: {verify: false},
+                                  timeout: 5} }
+
+      subject { Vertebrae::Configuration.new(host: 'example.com', connection_options: connection_options) }
+
+      it 'should override and extend the default options' do
+        opts = subject.faraday_options
+        expect(opts.keys).to contain_exactly(:headers, :ssl, :timeout, :url)
+        expect(opts[:headers]).to eq({'Accept' => 'application/json;q=0.1',
+                                      'Accept-Charset' => 'utf-8',
+                                      'User-Agent' => 'Vertebrae REST Gem',
+                                      'Content-Type' => 'application/json'})
+        expect(opts[:ssl]).to eq({verify: false})
+        expect(opts[:url]).to eq 'https://example.com/'
+        expect(opts[:timeout]).to eq 5
+      end
+    end
+  end
 end
