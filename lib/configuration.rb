@@ -98,7 +98,7 @@ module Vertebrae
         },
         :ssl => ssl,
         :url => endpoint
-      }
+      }.merge(connection_options)
     end
 
 
