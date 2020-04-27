@@ -15,7 +15,8 @@ module Vertebrae
         :connection_options,
         :content_type,
         :scheme,
-        :port
+        :port,
+        :additional_headers
     ].freeze
 
     # The default HTTP scheme configuration
@@ -49,7 +50,7 @@ module Vertebrae
     DEFAULT_CONNECTION_OPTIONS = {}
 
     DEFAULT_CONTENT_TYPE = 'application/json'.freeze
-
+    DEFAULT_ADDITIONAL_HEADERS = {}.freeze
 
     VALID_OPTIONS_KEYS.each do | key |
       define_method("default_#{key}".intern) { default_options[key] }
@@ -95,7 +96,7 @@ module Vertebrae
           ACCEPT_CHARSET   => "utf-8",
           USER_AGENT       => user_agent,
           CONTENT_TYPE     => content_type
-        },
+        }.merge(additional_headers),
         :ssl => ssl,
         :url => endpoint
       }.merge(connection_options)
