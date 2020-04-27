@@ -104,5 +104,23 @@ describe Vertebrae::Configuration do
         expect(opts[:timeout]).to eq 5
       end
     end
+
+    context 'with additional_headers' do
+      let(:additional_headers) { {'special-auth-token' => 'abcde12345'} }
+
+      subject { Vertebrae::Configuration.new(host: 'example.com', additional_headers: additional_headers) }
+
+      it 'should add the additional headers to the other headers' do
+        opts = subject.faraday_options
+        expect(opts.keys).to contain_exactly(:headers, :ssl, :url)
+        expect(opts[:headers]).to eq({'Accept' => 'application/json;q=0.1',
+                                      'Accept-Charset' => 'utf-8',
+                                      'User-Agent' => 'Vertebrae REST Gem',
+                                      'Content-Type' => 'application/json',
+                                      'special-auth-token' => 'abcde12345'})
+        expect(opts[:ssl]).to eq({})
+        expect(opts[:url]).to eq 'https://example.com/'
+      end
+    end
   end
 end
