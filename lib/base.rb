@@ -20,7 +20,7 @@ module Vertebrae
 
     # implement this in your api
     #
-    def new(options = {}, &block)
+    def new(_options = {}, &_block)
       raise "implement me!"
     end
 

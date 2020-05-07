@@ -8,7 +8,7 @@ module Vertebrae
     include Vertebrae::Constants
     include Vertebrae::Authorization
 
-    attr_accessor :options
+    attr_reader :options
     attr_accessor :configuration
 
     ALLOWED_OPTIONS = [
