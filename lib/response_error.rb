@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Vertebrae
   class ResponseError < StandardError
     attr_reader :status_code

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Vertebrae
   module Response
     class RaiseError < Faraday::Response::Middleware

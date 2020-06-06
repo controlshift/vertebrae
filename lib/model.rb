@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Vertebrae
   class Model
     attr_accessor :client

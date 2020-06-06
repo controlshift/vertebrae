@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Vertebrae
   class Configuration
     include Vertebrae::Constants

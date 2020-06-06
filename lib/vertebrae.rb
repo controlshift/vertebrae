@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'active_support/all'
 
 require 'constants'
@@ -10,9 +12,7 @@ require 'api'
 require 'base'
 require 'model'
 
-
 require 'railties' if defined? Rails
-
 
 module Vertebrae
 

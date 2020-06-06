@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Vertebrae
   module Base
     def logger
