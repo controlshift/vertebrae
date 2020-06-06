@@ -12,6 +12,6 @@ group :development do
   gem "bundler"
   gem "webmock"
   gem "rspec-its"
-  gem "juwelier", git: 'git@github.com:flajann2/juwelier.git'
+  gem "juwelier", git: 'https://github.com/flajann2/juwelier.git'
   gem "rubocop"
 end
