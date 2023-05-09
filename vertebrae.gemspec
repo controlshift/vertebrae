@@ -61,28 +61,16 @@ Gem::Specification.new do |s|
     s.specification_version = 4
   end
 
-  if s.respond_to? :add_runtime_dependency then
-    s.add_runtime_dependency(%q<activesupport>.freeze, [">= 5.1.4"])
-    s.add_runtime_dependency(%q<faraday>.freeze, ["> 0.9.2"])
-    s.add_runtime_dependency(%q<faraday_middleware>.freeze, ["> 0.12.2"])
-    s.add_runtime_dependency(%q<hashie>.freeze, ["> 3.5.7"])
-    s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
-    s.add_development_dependency(%q<bundler>.freeze, [">= 0"])
-    s.add_development_dependency(%q<webmock>.freeze, [">= 0"])
-    s.add_development_dependency(%q<rspec-its>.freeze, [">= 0"])
-    s.add_development_dependency(%q<juwelier>.freeze, [">= 0"])
-    s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
-  else
-    s.add_dependency(%q<activesupport>.freeze, [">= 5.1.4"])
-    s.add_dependency(%q<faraday>.freeze, ["> 0.9.2"])
-    s.add_dependency(%q<faraday_middleware>.freeze, ["> 0.12.2"])
-    s.add_dependency(%q<hashie>.freeze, ["> 3.5.7"])
-    s.add_dependency(%q<rspec>.freeze, [">= 0"])
-    s.add_dependency(%q<bundler>.freeze, [">= 0"])
-    s.add_dependency(%q<webmock>.freeze, [">= 0"])
-    s.add_dependency(%q<rspec-its>.freeze, [">= 0"])
-    s.add_dependency(%q<juwelier>.freeze, [">= 0"])
-    s.add_dependency(%q<rubocop>.freeze, [">= 0"])
-  end
+  s.add_runtime_dependency(%q<activesupport>.freeze, [">= 5.1.4"])
+  s.add_runtime_dependency(%q<faraday>.freeze, ["> 2.0"])
+  s.add_runtime_dependency(%q<faraday-mashify>.freeze, [">= 0"])
+  s.add_runtime_dependency(%q<faraday-multipart>.freeze, [">= 0"])
+
+  s.add_development_dependency(%q<rspec>.freeze, [">= 0"])
+  s.add_development_dependency(%q<bundler>.freeze, [">= 0"])
+  s.add_development_dependency(%q<webmock>.freeze, [">= 0"])
+  s.add_development_dependency(%q<rspec-its>.freeze, [">= 0"])
+  s.add_development_dependency(%q<juwelier>.freeze, [">= 0"])
+  s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
 end
 

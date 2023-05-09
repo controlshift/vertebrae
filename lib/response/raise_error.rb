@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
+require 'faraday/response'
+
 module Vertebrae
   module Response
-    class RaiseError < Faraday::Response::Middleware
+    class RaiseError < Faraday::Middleware
 
       def on_complete(response)
         status_code = response[:status].to_i
