@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 require 'faraday'
-require 'faraday_middleware'
+require 'faraday/multipart'
+require 'faraday/mashify'
 require 'response/raise_error'
 require 'authorization'
 
@@ -37,16 +38,17 @@ module Vertebrae
     #
     def default_middleware
       Proc.new do |builder|
-        builder.use Faraday::Request::Multipart
+        builder.use Faraday::Multipart::Middleware
         builder.use Faraday::Request::UrlEncoded
         if configuration.authenticated?
-          builder.use Faraday::Request::BasicAuthentication, configuration.username, configuration.password
+          builder.use Faraday::Request::Authorization, :basic, configuration.username, configuration.password
         end
 
         builder.use Faraday::Response::Logger if ENV['DEBUG']
+
         unless options[:raw]
-          builder.use FaradayMiddleware::Mashify
-          builder.use FaradayMiddleware::ParseJson
+          builder.use Faraday::Mashify::Middleware
+          builder.use Faraday::Response::Json
         end
         builder.use Vertebrae::Response::RaiseError
         builder.adapter configuration.adapter
