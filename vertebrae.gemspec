@@ -18,40 +18,13 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.md"
   ]
-  s.files = [
-    ".document",
-    ".github/workflows/ci.yml",
-    ".rspec",
-    ".rubocop.yml",
-    ".ruby-gemset",
-    ".ruby-version",
-    "Gemfile",
-    "LICENSE.txt",
-    "README.md",
-    "Rakefile",
-    "VERSION",
-    "lib/api.rb",
-    "lib/authorization.rb",
-    "lib/base.rb",
-    "lib/configuration.rb",
-    "lib/connection.rb",
-    "lib/constants.rb",
-    "lib/core_ext/array.rb",
-    "lib/model.rb",
-    "lib/railties.rb",
-    "lib/request.rb",
-    "lib/response/raise_error.rb",
-    "lib/response_error.rb",
-    "lib/vertebrae.rb",
-    "spec/api_spec.rb",
-    "spec/configuration_spec.rb",
-    "spec/dummy/client.rb",
-    "spec/dummy/dummy.rb",
-    "spec/logger_spec.rb",
-    "spec/request_spec.rb",
-    "spec/spec_helper.rb",
-    "vertebrae.gemspec"
-  ]
+
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  s.files         = Dir.chdir(File.expand_path(__dir__)) do
+    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  end
+
   s.homepage = "http://github.com/controlshift/vertebrae".freeze
   s.licenses = ["MIT".freeze]
   s.summary = "API Client Infrastructure".freeze
