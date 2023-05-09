@@ -2,15 +2,16 @@
 
 require 'active_support/all'
 
-require 'constants'
-require 'authorization'
-require 'configuration'
-require 'connection'
-require 'request'
-require 'response_error'
-require 'api'
-require 'base'
-require 'model'
+require 'vertebrae/constants'
+require 'vertebrae/authorization'
+require 'vertebrae/configuration'
+require 'vertebrae/connection'
+require 'vertebrae/request'
+require 'vertebrae/response_error'
+require 'vertebrae/api'
+require 'vertebrae/base'
+require 'vertebrae/model'
+require 'vertebrae/version'
 
 require 'railties' if defined? Rails
 
