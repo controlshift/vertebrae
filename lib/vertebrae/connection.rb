@@ -13,6 +13,7 @@ module Vertebrae
 
     attr_reader :options
     attr_accessor :configuration
+    attr_accessor :faraday_connection
 
     ALLOWED_OPTIONS = [
         :headers,
@@ -71,7 +72,7 @@ module Vertebrae
     # Returns a Faraday::Connection object
     #
     def connection
-      Faraday.new(configuration.faraday_options.merge(:builder => stack))
+      self.faraday_connection ||= Faraday.new(configuration.faraday_options.merge(:builder => stack))
     end
   end
 end
