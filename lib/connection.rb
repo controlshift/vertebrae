@@ -45,9 +45,9 @@ module Vertebrae
         end
 
         builder.use Faraday::Response::Logger if ENV['DEBUG']
-        builder.use Faraday::Response::Json
 
         unless options[:raw]
+          builder.use Faraday::Response::Json
           builder.use Faraday::Mashify::Middleware
         end
         builder.use Vertebrae::Response::RaiseError
