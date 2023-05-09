@@ -3,8 +3,8 @@
 require 'faraday'
 require 'faraday/multipart'
 require 'faraday/mashify'
-require 'response/raise_error'
-require 'authorization'
+require 'vertebrae/response/raise_error'
+require 'vertebrae/authorization'
 
 module Vertebrae
   class Connection
