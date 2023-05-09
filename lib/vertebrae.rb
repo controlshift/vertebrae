@@ -11,6 +11,7 @@ require 'response_error'
 require 'api'
 require 'base'
 require 'model'
+require 'version'
 
 require 'railties' if defined? Rails
 
