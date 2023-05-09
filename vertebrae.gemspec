@@ -62,7 +62,7 @@ Gem::Specification.new do |s|
   end
 
   s.add_runtime_dependency(%q<activesupport>.freeze, [">= 5.1.4"])
-  s.add_runtime_dependency(%q<faraday>.freeze, ["> 2.0"])
+  s.add_runtime_dependency(%q<faraday>.freeze, ["~> 2"])
   s.add_runtime_dependency(%q<faraday-mashify>.freeze, [">= 0"])
   s.add_runtime_dependency(%q<faraday-multipart>.freeze, [">= 0"])
 
