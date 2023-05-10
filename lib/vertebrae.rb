@@ -13,7 +13,7 @@ require 'vertebrae/base'
 require 'vertebrae/model'
 require 'vertebrae/version'
 
-require 'railties' if defined? Rails
+require 'vertebrae/railties' if defined? Rails
 
 module Vertebrae
 
