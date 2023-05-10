@@ -71,7 +71,7 @@ module Vertebrae
     end
 
     def adapter
-      options[:adapter] || auto_detect_adapter
+      options[:adapter] || ::Faraday.default_adapter
     end
 
     def adapter=(value)
@@ -89,7 +89,6 @@ module Vertebrae
         default_options[key] = "Vertebrae::Configuration::DEFAULT_#{key.to_s.upcase}".constantize
       end
     end
-
 
     def faraday_options
       {
@@ -117,33 +116,8 @@ module Vertebrae
       end
     end
 
-
     def endpoint
       "#{self.scheme}://#{self.host}#{self.port.present? ? ":#{self.port}" : ''}#{self.prefix}"
-    end
-
-    private
-
-    # Auto-detect the best adapter (HTTP "driver") available, based on libraries
-    # loaded by the user, preferring those with persistent connections
-    # ("keep-alive") by default
-    #
-    # @return [Symbol]
-    #
-    #
-    def auto_detect_adapter
-      case
-        when defined?(::Typhoeus)
-          :typhoeus
-        when defined?(::Patron)
-          :patron
-        when defined?(::HTTPClient)
-          :httpclient
-        when defined?(::Net::HTTP::Persistent)
-          :net_http_persistent
-        else
-          ::Faraday.default_adapter
-      end
     end
   end
 end

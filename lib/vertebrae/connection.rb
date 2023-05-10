@@ -34,45 +34,23 @@ module Vertebrae
       @configuration = Vertebrae::Configuration.new(options)
     end
 
-    # Default middleware stack that uses default adapter as specified at
-    # configuration stage.
-    #
-    def default_middleware
-      Proc.new do |builder|
-        builder.use Faraday::Multipart::Middleware
-        builder.use Faraday::Request::UrlEncoded
-        if configuration.authenticated?
-          builder.use Faraday::Request::Authorization, :basic, configuration.username, configuration.password
-        end
-
-        builder.use Faraday::Response::Logger if ENV['DEBUG']
-
-        unless options[:raw]
-          builder.use Faraday::Mashify::Middleware
-          builder.use Faraday::Response::Json
-        end
-        builder.use Vertebrae::Response::RaiseError
-        builder.adapter configuration.adapter
-      end
-    end
-
-    # Exposes middleware builder to facilitate custom stacks and easy
-    # addition of new extensions such as cache adapter.
-    #
-    def stack(&block)
-      @stack ||= begin
-        if block_given?
-          Faraday::RackBuilder.new(&block)
-        else
-          Faraday::RackBuilder.new(&default_middleware)
-        end
-      end
-    end
-
     # Returns a Faraday::Connection object
     #
     def connection
-      self.faraday_connection ||= Faraday.new(configuration.faraday_options.merge(:builder => stack))
+      self.faraday_connection ||= Faraday.new(configuration.faraday_options) do |f|
+        if configuration.authenticated?
+          f.request :authorization, :basic, configuration.username, configuration.password
+        end
+        f.request :multipart
+        f.request :url_encoded
+        unless options[:raw]
+          f.response :mashify
+          f.response :json
+        end
+
+        f.response :raise_error
+        f.adapter configuration.adapter
+      end
     end
   end
 end
