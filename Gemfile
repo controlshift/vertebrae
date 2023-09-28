@@ -9,6 +9,7 @@ gem 'hashie', '> 3.5.7'
 # Include everything needed to run rake, tests, features, etc.
 group :development do
   gem "rspec"
+  gem "rake"
   gem "bundler"
   gem "webmock"
   gem "rspec-its"
