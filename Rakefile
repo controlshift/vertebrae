@@ -11,21 +11,6 @@ rescue Bundler::BundlerError => e
 end
 require 'rake'
 
-require 'juwelier'
-Juwelier::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://guides.rubygems.org/specification-reference/ for more options
-  gem.name = "vertebrae"
-  gem.homepage = "http://github.com/controlshift/vertebrae"
-  gem.license = "MIT"
-  gem.summary = %Q{API Client Infrastructure}
-  gem.description = %Q{A set of low level infrastructure and reusable code for building API clients}
-  gem.email = "nathan@controlshiftlabs.com"
-  gem.authors = ["Nathan Woodhull"]
-
-  # dependencies defined in Gemfile
-end
-Juwelier::RubygemsDotOrgTasks.new
-
 require 'rspec/core'
 require 'rspec/core/rake_task'
 RSpec::Core::RakeTask.new(:spec) do |spec|

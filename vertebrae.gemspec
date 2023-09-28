@@ -69,7 +69,6 @@ Gem::Specification.new do |s|
     s.add_development_dependency(%q<bundler>.freeze, [">= 0"])
     s.add_development_dependency(%q<webmock>.freeze, [">= 0"])
     s.add_development_dependency(%q<rspec-its>.freeze, [">= 0"])
-    s.add_development_dependency(%q<juwelier>.freeze, [">= 0"])
     s.add_development_dependency(%q<rubocop>.freeze, [">= 0"])
   else
     s.add_dependency(%q<activesupport>.freeze, [">= 5.1.4"])
@@ -80,7 +79,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<bundler>.freeze, [">= 0"])
     s.add_dependency(%q<webmock>.freeze, [">= 0"])
     s.add_dependency(%q<rspec-its>.freeze, [">= 0"])
-    s.add_dependency(%q<juwelier>.freeze, [">= 0"])
     s.add_dependency(%q<rubocop>.freeze, [">= 0"])
   end
 end
