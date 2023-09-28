@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem 'activesupport', '>= 5.1.4'
-gem 'faraday', '> 0.9.2'
+gem 'faraday', '~> 1'
 gem 'faraday_middleware', '> 0.12.2'
 gem 'hashie', '> 3.5.7'
 
