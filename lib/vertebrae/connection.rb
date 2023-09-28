@@ -2,8 +2,8 @@
 
 require 'faraday'
 require 'faraday_middleware'
-require 'response/raise_error'
-require 'authorization'
+require 'vertebrae/response/raise_error'
+require 'vertebrae/authorization'
 
 module Vertebrae
   class Connection
@@ -44,6 +44,7 @@ module Vertebrae
         end
 
         builder.use Faraday::Response::Logger if ENV['DEBUG']
+
         unless options[:raw]
           builder.use FaradayMiddleware::Mashify
           builder.use FaradayMiddleware::ParseJson

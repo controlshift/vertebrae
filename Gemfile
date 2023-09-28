@@ -1,7 +1,7 @@
 source "http://rubygems.org"
 
 gem 'activesupport', '>= 5.1.4'
-gem 'faraday', '> 0.9.2'
+gem 'faraday', '~> 1'
 gem 'faraday_middleware', '> 0.12.2'
 gem 'hashie', '> 3.5.7'
 
@@ -9,9 +9,9 @@ gem 'hashie', '> 3.5.7'
 # Include everything needed to run rake, tests, features, etc.
 group :development do
   gem "rspec"
+  gem "rake"
   gem "bundler"
   gem "webmock"
   gem "rspec-its"
-  gem "juwelier", git: 'https://github.com/flajann2/juwelier.git'
   gem "rubocop"
 end
