@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = Gem::Requirement.new(">= 0".freeze) if s.respond_to? :required_rubygems_version=
   s.require_paths = ["lib".freeze]
   s.authors = ["Nathan Woodhull".freeze]
-  s.date = "2021-07-23"
+  s.date = "2023-09-28"
   s.description = "A set of low level infrastructure and reusable code for building API clients".freeze
   s.email = "nathan@controlshiftlabs.com".freeze
   s.extra_rdoc_files = [
