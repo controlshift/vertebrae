@@ -32,7 +32,11 @@ module Vertebrae
       end
       connection.options = default_options.merge(initialisation_options.merge(options))
 
-      path =  connection.configuration.prefix + '/' + path
+      # Join without assuming either side has (or lacks) its own leading/trailing slash, so a
+      # default '/' prefix combined with an already-absolute path never yields a leading '//'.
+      # Faraday treats a path starting with '//' as a protocol-relative URL and mangles it,
+      # producing malformed URLs like `https://host////api/path`.
+      path = File.join(connection.configuration.prefix.to_s, path.to_s.delete_prefix('/'))
 
       ::Vertebrae::Base.logger.debug "EXECUTED: #{method} - #{path} with #{params} and #{options}"
 

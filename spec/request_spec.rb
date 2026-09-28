@@ -49,6 +49,22 @@ describe Vertebrae::Request do
       end
     end
 
+    context 'with a custom prefix and a path without a leading slash' do
+      let(:options) { {prefix: '/rest/v1'} }
+      it 'should join the prefix and path with a single slash' do
+        stub_request(:get, 'https://test.com/rest/v1/user/')
+        vb.request(:get, 'user/', {}, options)
+      end
+    end
+
+    context 'with the default prefix and an already-absolute path' do
+      let(:options) { {} }
+      it 'should not produce a malformed URL with duplicate slashes' do
+        stub_request(:post, 'https://test.com/api/member/details')
+        vb.request(:post, '/api/member/details', {}, options)
+      end
+    end
+
     context 'with a different host' do
       let(:options) { {host: 'test2.com'} }
       it 'should make the request to the default host' do
