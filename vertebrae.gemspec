@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   end
   spec.require_paths = ['lib']
 
-  spec.required_ruby_version = ['>= 3.3', '< 5.0']
+  spec.required_ruby_version = ['>= 3.4', '< 5.0']
 
   # Runtime dependencies
   spec.add_runtime_dependency 'activesupport', '>= 6.1'

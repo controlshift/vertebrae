@@ -9,5 +9,5 @@
   reject at the edge with a bare 403.
 
 ### Breaking Changes
-- Dropped support for Ruby versions older than 3.3. Officially supported versions are Ruby 3.3, 3.4, and 4.0.
+- Dropped support for Ruby versions older than 3.4. Officially supported versions are Ruby 3.4 and 4.0.
 - Pinned `faraday` to `~> 2.0` (previously unbounded above `2.0`).

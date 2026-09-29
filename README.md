@@ -6,7 +6,7 @@ Some basic infrastructure for writing beautiful API clients. See tijuana\_client
 
 ## Requirements
 
-- Ruby 3.3, 3.4, or 4.0
+- Ruby 3.4 or 4.0
 - Faraday ~> 2.0
 
 ## Development
