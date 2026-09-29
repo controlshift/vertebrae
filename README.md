@@ -4,6 +4,11 @@ Some basic infrastructure for writing beautiful API clients. See tijuana\_client
 
 [![CI Status](https://github.com/controlshift/vertebrae/actions/workflows/ci.yml/badge.svg)](https://github.com/controlshift/vertebrae/actions/workflows/ci.yml)
 
+## Requirements
+
+- Ruby 3.4 or 4.0
+- Faraday ~> 2.0
+
 ## Development
 
 After checking out the repo, run `bundle install` to install dependencies. Then, run `rake spec` to run the tests.

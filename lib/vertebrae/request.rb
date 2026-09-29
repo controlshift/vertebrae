@@ -32,7 +32,8 @@ module Vertebrae
       end
       connection.options = default_options.merge(initialisation_options.merge(options))
 
-      path =  connection.configuration.prefix + '/' + path
+      # Avoid a leading '//' here — Faraday treats it as a protocol-relative URL and mangles the path.
+      path = File.join(connection.configuration.prefix.to_s, path.to_s.delete_prefix('/'))
 
       ::Vertebrae::Base.logger.debug "EXECUTED: #{method} - #{path} with #{params} and #{options}"
 
